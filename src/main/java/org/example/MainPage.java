@@ -1,6 +1,8 @@
 package org.example;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
 
@@ -30,5 +32,18 @@ public class MainPage extends BasePage {
 
     public boolean checkExistMain(String elem) {
         return checkExist(mapMainPage.get(elem));
+    }
+
+    public void clickMain(String elem) {
+        clickElem(mapMainPage.get(elem));
+    }
+
+    public String getTextMain(String elem) {
+        try {
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
+        } catch (NoAlertPresentException ignored) {
+        }
+        return getText(mapMainPage.get(elem));
     }
 }

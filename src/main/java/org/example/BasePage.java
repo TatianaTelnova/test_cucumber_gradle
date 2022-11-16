@@ -9,6 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+
 public class BasePage {
     protected WebDriver driver;
     protected WebDriverWait wait;
@@ -20,15 +22,36 @@ public class BasePage {
 
     protected boolean checkExist(By elem) {
         try {
-//            WebElement we = getElem(elem);
-//            int deltaY = we.getRect().y;
-//            Actions action = new Actions(driver);
-//            action.scrollByAmount(0, deltaY).perform();
+            WebElement we = getElem(elem);
+            int deltaY = we.getRect().y;
+            Actions action = new Actions(driver);
+            action.scrollByAmount(0, deltaY).perform();
             driver.findElement(elem);
             return true;
         } catch (NoSuchElementException e) {
             return false;
         }
+    }
+
+    protected void clickElem(By elem) {
+        scroll(elem);
+        driver.findElement(elem).click();
+    }
+
+    protected WebElement getElem(By elem) {
+        wait.until(elementToBeClickable(elem));
+        return driver.findElement(elem);
+    }
+
+    protected String getText(By elem) {
+        return driver.findElement(elem).getAttribute("innerText");
+    }
+
+    private void scroll(By elem) {
+        WebElement we = getElem(elem);
+        int deltaY = we.getRect().y;
+        Actions action = new Actions(driver);
+        action.scrollByAmount(0, deltaY).perform();
     }
 }
 
