@@ -7,7 +7,7 @@ import org.openqa.selenium.WebDriver;
 import java.util.HashMap;
 
 public class MainPage extends BasePage {
-    private HashMap<String, By> mapMainPage = new HashMap<>() {
+    private final HashMap<String, By> mapMainPage = new HashMap<>() {
         {
             put("Войти", By.className("css-sy2ljg"));
             put("Связаться с нами", By.className("css-ndfch2"));
@@ -30,12 +30,20 @@ public class MainPage extends BasePage {
         return mapMainPage.containsKey(elem);
     }
 
-    public boolean checkExistMain(String elem) {
-        return checkExist(mapMainPage.get(elem));
+    public int countMain(String elems) {
+        return countElems(mapMainPage.get(elems));
+    }
+
+    public void clickGoToFaq(String nav, String elem) {
+        clickElemWithFilter(mapMainPage.get(nav), mapMainPage.get(elem));
     }
 
     public void clickMain(String elem) {
         clickElem(mapMainPage.get(elem));
+    }
+
+    public boolean checkExistMain(String elem) {
+        return checkExist(mapMainPage.get(elem));
     }
 
     public String getTextMain(String elem) {
