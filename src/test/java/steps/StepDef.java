@@ -6,8 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.MainPage;
-import org.assertj.core.api.Assertions;
-import org.junit.Assert;
+import org.assertj.core.api.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -73,5 +72,10 @@ public class StepDef extends BaseStepDef {
             default:
                 break;
         }
+    }
+
+    @Then("return result")
+    public void simpleCheck() {
+        Assertions.assertThat("qwerty").isEqualTo("qwerty");
     }
 }
